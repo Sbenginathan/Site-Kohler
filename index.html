@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mr.Kohler</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800&family=Inter+Tight:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1e0f9;--header:#f7ecef;--card:#f7ecef;--ink:#1e1e22;--blue:#2255ff;--grid:rgba(200,120,200,.22)}
+*{box-sizing:border-box;margin:0}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background-color:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:48px 48px;min-height:100vh}
+header{position:sticky;top:0;z-index:20;height:100px;background:var(--header);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(220,120,170,.35)}
+.logo{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:44px;letter-spacing:-.5px;background:none;border:0;cursor:pointer;color:var(--ink)}
+.burger{position:absolute;left:28px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;width:42px;height:34px;display:flex;flex-direction:column;justify-content:space-between;padding:4px 0}
+.burger span{display:block;height:3px;background:var(--ink);border-radius:2px}
+h1,h2{font-family:'Inter Tight',system-ui,sans-serif;font-weight:800;letter-spacing:-.04em;line-height:.95;text-align:center}
+.hero{min-height:calc(100vh - 100px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:24px 20px 80px}
+.hero h1{font-size:clamp(40px,6.2vw,84px);max-width:1200px}
+.btn{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:500;background:var(--blue);color:#fff;border:0;border-radius:999px;padding:16px 32px;cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+main{max-width:1240px;margin:0 auto;padding:60px 24px 100px}
+.q{font-size:clamp(34px,5vw,64px);margin-bottom:36px}
+.classes{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+.classes button{flex:1 1 220px;max-width:360px;background:var(--card);color:var(--ink);border:0;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:28px;padding:34px 10px;border-radius:30px;box-shadow:0 12px 30px -8px rgba(220,120,170,.4);transition:transform .15s}
+.classes button:hover{transform:translateY(-3px)}
+.classes button.on{background:var(--blue);color:#fff}
+.list{max-width:860px;margin:36px auto 0;display:grid;gap:14px}
+.theme{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;margin:24px 0 2px}
+.chap{display:flex;align-items:center;gap:18px;background:var(--card);padding:20px 26px;border-radius:22px;border:0;text-align:left;width:100%;cursor:pointer;color:var(--ink);font-family:'DM Sans',sans-serif;box-shadow:0 8px 22px -8px rgba(220,120,170,.4);transition:transform .15s}
+.chap:hover{transform:translateX(6px)}
+.chap .n{flex:none;width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700}
+.chap b{font-size:20px;display:block}
+.chap small{display:block;color:#555;font-size:15px;margin-top:2px}
+.chap .arr{margin-left:auto;font-size:24px;color:var(--blue)}
+.course{max-width:820px;margin:0 auto;background:rgba(247,236,239,.93);border-radius:30px;padding:48px 52px;box-shadow:0 16px 40px -12px rgba(220,120,170,.45)}
+.tag{display:inline-block;background:var(--blue);color:#fff;border-radius:999px;padding:6px 16px;font-size:14px;font-weight:500;margin-bottom:18px}
+.course h1{text-align:left;font-size:clamp(30px,4.2vw,50px);margin-bottom:26px;line-height:1.02}
+.course h3{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:25px;letter-spacing:-.02em;margin:30px 0 10px}
+.course p,.course li{font-size:18px;line-height:1.65}
+.course ul{padding-left:24px;margin:8px 0}
+.def{background:#fff;border-left:5px solid var(--blue);border-radius:12px;padding:16px 20px;margin:18px 0;font-size:18px;line-height:1.6}
+.def b{color:var(--blue)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:40px;flex-wrap:wrap}
+.link{background:none;border:0;cursor:pointer;color:var(--blue);font-family:'DM Sans',sans-serif;font-weight:700;font-size:17px;padding:0}
+.back{color:var(--ink);font-weight:500;margin-bottom:20px;display:inline-block}
+.note{margin-top:30px;font-size:14px;color:#777;font-style:italic}
+.drawer{position:fixed;inset:0;z-index:30;display:none}
+.drawer.open{display:block}
+.shade{position:absolute;inset:0;background:rgba(30,30,34,.35)}
+.drawer nav{position:absolute;left:0;top:0;bottom:0;width:min(320px,85vw);background:var(--header);padding:110px 28px 28px;display:flex;flex-direction:column;gap:6px;box-shadow:12px 0 40px rgba(0,0,0,.15)}
+.drawer nav button{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:28px;color:var(--ink);background:none;border:0;text-align:left;cursor:pointer;padding:10px 0;letter-spacing:-.02em}
+.drawer nav button:hover{color:var(--blue)}
+@media(max-width:700px){header{height:80px}.logo{font-size:32px}.burger{left:16px}.course{padding:30px 22px}.classes{gap:16px}}
+</style>
+</head>
+<body>
+<header>
+  <button class="burger" data-go="accueil" id="burger" aria-label="Menu" data-menu="1"><span></span><span></span><span></span></button>
+  <button class="logo" data-go="accueil">Mr.Kohler</button>
+</header>
+<div class="drawer" id="drawer">
+  <div class="shade" data-close="1"></div>
+  <nav>
+    <button data-go="accueil">Accueil</button>
+    <button data-go="classe">Choisir ma classe</button>
+    <button data-go="prog:seconde">Seconde</button>
+    <button data-go="prog:premiere">Première</button>
+    <button data-go="prog:terminale">Terminale</button>
+  </nav>
+</div>
+<div id="app"></div>
+
+<script>
+/* ===================== DONNÉES =====================
+   Chaque chapitre : titre, resume, s = sections [titre, texte ou liste], d = définition clé.
+   Pour remplacer par le vrai cours du prof : modifier s / d, ou fournir "html".
+*/
+const CLASSES = {
+seconde:{nom:"Seconde",themes:[
+{t:"Science économique",chapitres:[
+ {titre:"Introduction à la science économique",resume:"Rareté, choix, coût d'opportunité",
+  d:"<b>Coût d'opportunité :</b> valeur de la meilleure alternative à laquelle on renonce quand on fait un choix.",
+  s:[["La rareté et le choix","Les besoins sont illimités mais les ressources (temps, argent, matières premières) sont limitées. Tout agent doit donc faire des choix, et choisir c'est renoncer."],
+     ["Les agents économiques",["Les <b>ménages</b> consomment et épargnent.","Les <b>entreprises</b> produisent des biens et services.","Les <b>administrations publiques</b> produisent des services non marchands et redistribuent."]],
+     ["Raisonner en économiste","Les économistes analysent les choix à partir des incitations (prix, revenus, impôts) et comparent les coûts et les avantages d'une décision."]]},
+ {titre:"Comment un marché concurrentiel fonctionne-t-il ?",resume:"Offre, demande et prix d'équilibre",
+  d:"<b>Prix d'équilibre :</b> prix pour lequel la quantité offerte est égale à la quantité demandée.",
+  s:[["Qu'est-ce qu'un marché ?","Un marché est un lieu, physique ou virtuel, où des offreurs et des demandeurs se rencontrent pour échanger un bien ou un service à un certain prix."],
+     ["La demande et l'offre",["<b>Demande :</b> plus le prix baisse, plus les consommateurs achètent (courbe décroissante).","<b>Offre :</b> plus le prix monte, plus les producteurs veulent vendre (courbe croissante)."]],
+     ["Le retour à l'équilibre","Si le prix est trop élevé, l'offre dépasse la demande (excédent) et le prix baisse. S'il est trop bas, la demande dépasse l'offre (pénurie) et le prix monte."],
+     ["Les limites du marché","Externalités, asymétries d'information et pouvoir de marché peuvent justifier une intervention publique."]]},
+ {titre:"Comment crée-t-on de la monnaie ?",resume:"Banques, crédit et création monétaire",
+  d:"<b>Monnaie :</b> instrument accepté par tous comme moyen de paiement.",
+  s:[["Les fonctions de la monnaie",["Intermédiaire des échanges.","Unité de compte.","Réserve de valeur."]],
+     ["Les formes de la monnaie","Pièces et billets (monnaie fiduciaire), et surtout monnaie scripturale : les sommes inscrites sur les comptes bancaires."],
+     ["La création monétaire","Elle a lieu quand une banque accorde un crédit : elle crédite le compte de l'emprunteur. La banque centrale (BCE) contrôle cette création grâce à ses taux directeurs."]]},
+ {titre:"Comment finance-t-on l'économie ?",resume:"Financement direct et indirect",
+  d:"<b>Capacité de financement :</b> situation d'un agent dont l'épargne dépasse les dépenses d'investissement.",
+  s:[["Capacité et besoin de financement","Certains agents ont une épargne excédentaire, d'autres ont besoin d'emprunter pour investir. La finance les met en relation."],
+     ["Financement indirect","Les banques collectent l'épargne et accordent des crédits : elles sont des intermédiaires financiers."],
+     ["Financement direct","Les entreprises émettent des actions ou des obligations sur les marchés financiers, directement auprès des épargnants."]]}
+]},
+{t:"Sociologie",chapitres:[
+ {titre:"Comment devenons-nous des acteurs sociaux ?",resume:"Socialisation primaire et secondaire",
+  d:"<b>Socialisation :</b> processus par lequel un individu apprend et intériorise les normes, valeurs et rôles de la société.",
+  s:[["Socialisation primaire","Elle a lieu dans l'enfance, surtout dans la famille : langage, règles de politesse, goûts."],
+     ["Socialisation secondaire","Elle se poursuit avec l'école, les pairs, les médias, le travail, et s'adapte tout au long de la vie."],
+     ["Une socialisation différenciée","Elle varie selon le milieu social et le genre : jouets, loisirs et attentes parentales ne sont pas les mêmes pour tous."]]},
+ {titre:"Comment se construisent les liens sociaux ?",resume:"Groupes, réseaux et sociabilité",
+  d:"<b>Sociabilité :</b> capacité d'un individu à entretenir des relations avec d'autres.",
+  s:[["Les groupes et les réseaux","On appartient à des cercles de sociabilité (famille, amis, collègues) qui forment un réseau de relations."],
+     ["Liens forts et liens faibles","Granovetter montre que les liens faibles (simples connaissances) sont très utiles, par exemple pour trouver un emploi."],
+     ["Deux formes de solidarité","Durkheim distingue la solidarité mécanique (ressemblance) de la solidarité organique (complémentarité liée à la division du travail)."]]}
+]},
+{t:"Science politique",chapitres:[
+ {titre:"Comment voter ?",resume:"Participation électorale et abstention",
+  d:"<b>Abstention :</b> fait de ne pas participer à un scrutin alors que l'on est inscrit sur les listes électorales.",
+  s:[["Le suffrage universel","En France, tout citoyen majeur inscrit sur les listes électorales peut voter. Le vote est un droit, pas une obligation."],
+     ["Qui s'abstient ?","L'abstention est plus forte chez les jeunes, les moins diplômés et les personnes peu intégrées socialement."],
+     ["Pourquoi vote-t-on ?","Par devoir civique, par intérêt pour un enjeu, ou par attachement à un parti. Les facteurs sociaux et politiques se combinent."]]}
+]}]},
+
+premiere:{nom:"Première",themes:[
+{t:"Science économique",chapitres:[
+ {titre:"Comment crée-t-on des richesses et comment les mesure-t-on ?",resume:"Production, valeur ajoutée, PIB",
+  d:"<b>Valeur ajoutée :</b> production − consommations intermédiaires.",
+  s:[["Produire","Les entreprises combinent travail et capital pour produire des biens et services marchands. L'État produit surtout des services non marchands."],
+     ["Mesurer","Le PIB est la somme des valeurs ajoutées créées sur un territoire pendant une année, auxquelles on ajoute les impôts sur les produits nets des subventions."],
+     ["Les limites du PIB",["Il ignore le travail domestique et le bénévolat.","Il ne prend pas en compte les dégâts environnementaux.","Il ne mesure pas les inégalités : d'où l'intérêt de l'IDH."]]]},
+ {titre:"Comment le marché du travail fonctionne-t-il ?",resume:"Salaire, emploi et chômage",
+  d:"<b>Taux de chômage :</b> nombre de chômeurs / population active × 100.",
+  s:[["Offre et demande de travail","Les entreprises demandent du travail, les ménages en offrent. Le salaire est le prix du travail."],
+     ["Les types de chômage",["<b>Conjoncturel :</b> lié au ralentissement de l'activité.","<b>Structurel :</b> lié aux déséquilibres durables (qualifications, rigidités).","<b>Frictionnel :</b> lié au délai pour retrouver un emploi."]],
+     ["Un marché particulier","Le salaire minimum, les syndicats et la segmentation du marché du travail expliquent que ce marché ne fonctionne pas comme les autres."]]},
+ {titre:"Comment l'État intervient-il dans l'économie ?",resume:"Régulation, redistribution, fiscalité",
+  d:"<b>Redistribution :</b> transfert de revenus entre agents via les prélèvements obligatoires et les prestations sociales.",
+  s:[["Les trois fonctions (Musgrave)",["Allocation : produire des biens publics.","Redistribution : réduire les inégalités.","Stabilisation : atténuer les fluctuations de l'activité."]],
+     ["Les outils","Impôts, cotisations, dépenses publiques, réglementation. La politique budgétaire agit sur la demande."],
+     ["Les défaillances de l'État","Coût des interventions, effets pervers, dette publique : l'État n'est pas toujours plus efficace que le marché."]]}
+]},
+{t:"Sociologie",chapitres:[
+ {titre:"Comment la société est-elle structurée ?",resume:"Classes, groupes et stratification",
+  d:"<b>Mobilité sociale :</b> changement de position sociale d'un individu par rapport à celle de ses parents.",
+  s:[["Analyser la structure sociale","Marx insiste sur les classes sociales (propriétaires des moyens de production ou non). Weber ajoute le statut et le pouvoir."],
+     ["Les capitaux de Bourdieu",["Capital économique : revenus, patrimoine.","Capital culturel : diplômes, savoirs, goûts.","Capital social : réseau de relations."]],
+     ["La France aujourd'hui","Les PCS permettent de décrire la société. La moyennisation et la polarisation sont deux lectures qui s'opposent."]]},
+ {titre:"Quels sont les processus sociaux qui contribuent à la déviance ?",resume:"Normes, déviance et contrôle social",
+  d:"<b>Déviance :</b> comportement qui s'écarte des normes d'un groupe et qui est sanctionné.",
+  s:[["Une notion relative","Ce qui est déviant dépend de l'époque et du lieu. Durkheim voit même dans le crime un phénomène normal."],
+     ["La théorie de l'étiquetage","Pour Becker, on devient déviant quand le groupe nous étiquette comme tel : la déviance est une construction sociale."],
+     ["Le contrôle social","Formel (police, justice) ou informel (famille, pairs), il vise à faire respecter les normes."]]}
+]},
+{t:"Regards croisés",chapitres:[
+ {titre:"Comment les institutions favorisent-elles l'insertion sociale ?",resume:"École, famille, travail",
+  d:"<b>Intégration sociale :</b> processus par lequel un individu s'insère dans la société et partage ses normes.",
+  s:[["Plusieurs instances d'intégration","La famille, l'école, le travail et l'État-providence créent des liens et protègent les individus."],
+     ["Les fragilités","Chômage, précarité et isolement peuvent affaiblir ces liens et conduire à l'exclusion."]]}
+]}]},
+
+terminale:{nom:"Terminale",themes:[
+{t:"Science économique",chapitres:[
+ {titre:"Quelles sont les sources de la croissance économique ?",resume:"Facteurs de production, progrès technique",
+  d:"<b>Croissance économique :</b> augmentation soutenue de la production de biens et services sur longue période.",
+  s:[["Accumuler des facteurs","La croissance vient de l'augmentation du travail et du capital, mais ces facteurs connaissent des rendements décroissants."],
+     ["La productivité globale des facteurs","Le progrès technique, l'éducation et l'organisation expliquent la part de la croissance que le travail et le capital ne justifient pas (Solow)."],
+     ["Innovation et destruction créatrice","Schumpeter : l'innovation fait disparaître des activités anciennes et en crée de nouvelles. La croissance est aussi débattue pour sa soutenabilité."]]},
+ {titre:"Quels sont les fondements du commerce international ?",resume:"Avantages comparatifs, mondialisation",
+  d:"<b>Avantage comparatif :</b> un pays se spécialise dans le bien dont le coût d'opportunité est le plus faible (Ricardo).",
+  s:[["Les théories classiques","Smith insiste sur l'avantage absolu, Ricardo montre que l'échange profite même à un pays moins efficace partout."],
+     ["Les théories modernes","Heckscher-Ohlin-Samuelson : dotations factorielles. Krugman : économies d'échelle et différenciation des produits."],
+     ["Libre-échange ou protectionnisme","Le libre-échange favorise la spécialisation et la baisse des prix, le protectionnisme protège les activités locales mais peut provoquer des représailles."]]},
+ {titre:"Comment lutter contre le chômage ?",resume:"Politiques de l'emploi",
+  d:"<b>Politique de l'emploi :</b> ensemble des mesures publiques visant à réduire le chômage.",
+  s:[["Agir sur la demande","Relance keynésienne : hausse des dépenses publiques ou baisse des impôts pour soutenir l'activité."],
+     ["Agir sur l'offre","Baisser le coût du travail, assouplir le marché du travail, développer la formation."],
+     ["Les limites","Dette publique, effets d'aubaine, mondialisation : aucune politique n'est efficace seule."]]},
+ {titre:"Quelle action publique pour l'environnement ?",resume:"Externalités et instruments",
+  d:"<b>Externalité négative :</b> coût subi par un tiers du fait d'une activité sans compensation (pollution).",
+  s:[["Un problème de biens communs","Hardin parle de tragédie des biens communs, Ostrom montre qu'une gestion collective efficace est possible."],
+     ["Les instruments",["<b>Réglementation :</b> normes et interdictions.","<b>Taxes</b> (Pigou) : faire payer le pollueur.","<b>Marché de droits à polluer</b> : quotas échangeables.","<b>Subventions</b> aux technologies propres."]],
+     ["Une action à plusieurs échelles","Locale, nationale et internationale : accords climatiques, mais la coordination reste difficile."]]}
+]},
+{t:"Sociologie",chapitres:[
+ {titre:"Quelles inégalités sont compatibles avec la justice sociale ?",resume:"Égalité, équité, mobilité sociale",
+  d:"<b>Égalité des chances :</b> principe selon lequel les positions sociales ne dépendent pas de l'origine sociale.",
+  s:[["Plusieurs conceptions de l'égalité","Égalité des droits, des situations, des chances. Chacune justifie des politiques différentes."],
+     ["La théorie de Rawls","Les inégalités sont acceptables si elles profitent aux plus défavorisés et si les positions sont ouvertes à tous."],
+     ["Mesurer et réduire","Revenus, patrimoines, diplômes : les inégalités sont multiples et se cumulent. La mobilité sociale reste limitée."]]},
+ {titre:"Comment expliquer l'engagement politique ?",resume:"Participation et mobilisations",
+  d:"<b>Passager clandestin :</b> individu qui profite d'un bien collectif sans contribuer à son coût (Olson).",
+  s:[["Le paradoxe d'Olson","Pourquoi agir collectivement si l'on peut profiter du résultat sans participer ? Les incitations sélectives expliquent l'engagement."],
+     ["Ressources et opportunités","Tilly et les théories de la mobilisation des ressources : organisation, réseaux et contexte politique comptent."],
+     ["Les nouvelles formes","Pétitions en ligne, boycott, manifestations : le répertoire d'action évolue et touche des publics différents."]]}
+]}]}
+};
+
+/* ===================== RENDU ===================== */
+const app = document.getElementById('app');
+const drawer = document.getElementById('drawer');
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function contenu(ch){
+  if(ch.html) return ch.html;
+  let h = '';
+  (ch.s||[]).forEach((sec,k)=>{
+    h += `<h3>${k+1}. ${sec[0]}</h3>`;
+    h += Array.isArray(sec[1]) ? `<ul>${sec[1].map(x=>`<li>${x}</li>`).join('')}</ul>` : `<p>${sec[1]}</p>`;
+    if(k===0 && ch.d) h += `<div class="def">${ch.d}</div>`;
+  });
+  return h;
+}
+
+function classButtons(active){
+  return `<div class="classes">${Object.entries(CLASSES).map(([id,c])=>
+    `<button data-go="prog:${id}" class="${id===active?'on':''}">${c.nom}</button>`).join('')}</div>`;
+}
+
+function accueil(){
+  app.innerHTML = `<section class="hero"><h1>Apprenez de la bonne manière,<br>apprenez avec Kohler.</h1>
+  <button class="btn" data-go="classe">Commencer</button></section>`;
+}
+
+function classe(id){
+  const c = CLASSES[id];
+  let h = `<main><h2 class="q">En quelle classe est-tu ?</h2>${classButtons(id)}<h2 class="q">Quel cours souhaites-tu réviser ?</h2>`;
+  if(c){
+    h += `<div class="list">`;
+    c.themes.forEach((th,i)=>{
+      h += `<div class="theme">${esc(th.t)}</div>`;
+      th.chapitres.forEach((ch,j)=>{
+        h += `<button class="chap" data-go="cours:${id}:${i}:${j}"><span class="n">${j+1}</span>
+          <span><b>${esc(ch.titre)}</b><small>${esc(ch.resume||'')}</small></span><span class="arr">→</span></button>`;
+      });
+    });
+    h += `</div>`;
+  }
+  app.innerHTML = h + `</main>`;
+}
+
+function cours(id,i,j){
+  const c = CLASSES[id], th = c.themes[i], ch = th.chapitres[j];
+  const flat = []; c.themes.forEach((t,a)=>t.chapitres.forEach((_,b)=>flat.push([a,b])));
+  const k = flat.findIndex(p=>p[0]==i&&p[1]==j);
+  const lk = (p,l)=> p ? `<button class="link" data-go="cours:${id}:${p[0]}:${p[1]}">${l}</button>` : '<span></span>';
+  app.innerHTML = `<main><button class="link back" data-go="prog:${id}">← Retour au programme de ${c.nom}</button>
+  <article class="course"><span class="tag">${c.nom} · ${esc(th.t)}</span><h1>${esc(ch.titre)}</h1>
+  ${contenu(ch)}
+  <div class="nav">${lk(flat[k-1],'← Chapitre précédent')}${lk(flat[k+1],'Chapitre suivant →')}</div>
+  <p class="note">Contenu de base à compléter par le cours de M. Kohler.</p></article></main>`;
+}
+
+function go(route){
+  const [page,a,b,c] = route.split(':');
+  drawer.classList.remove('open');
+  window.scrollTo(0,0);
+  if(page==='classe') classe();
+  else if(page==='prog') classe(a);
+  else if(page==='cours') cours(a,+b,+c);
+  else accueil();
+}
+
+/* un seul écouteur de clic : fiable partout (pas de dépendance à l'URL) */
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-menu]')){ drawer.classList.toggle('open'); return; }
+  if(e.target.closest('[data-close]')){ drawer.classList.remove('open'); return; }
+  const el = e.target.closest('[data-go]');
+  if(el) go(el.dataset.go);
+});
+
+go('accueil');
+</script>
+</body>
+</html>
